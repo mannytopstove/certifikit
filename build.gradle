@@ -4,18 +4,27 @@ buildscript {
     gradlePluginPortal()
   }
 
+  apply from: new File("./dependencies.gradle")
+
   dependencies {
-    classpath Dependencies.junitGradlePlugin
-    classpath Dependencies.kotlinGradlePlugin
-    classpath Dependencies.dokkaGradlePlugin
-    classpath Dependencies.mavenPublishGradlePlugin
-    classpath Dependencies.spotlessPlugin
+    classpath dep.junitGradlePlugin
+    classpath dep.kotlinGradlePlugin
+    classpath dep.dokkaGradlePlugin
+    classpath dep.mavenPublishGradlePlugin
+    classpath dep.spotlessPlugin
   }
 }
 
 allprojects {
   group = 'app.cash.certifikit'
   version = '0.3.0-SNAPSHOT'
+
+  repositories {
+    mavenCentral()
+    maven { url 'https://dl.bintray.com/kotlin/dokka' }
+    maven { url "https://kotlin.bintray.com/kotlinx/" }
+    google()
+  }
 }
 
 subprojects {
@@ -44,7 +53,7 @@ subprojects {
   spotless {
     kotlin {
       target "**/*.kt"
-      ktlint(Versions.ktlintVersion).userData(['indent_size': '2', 'continuation_indent_size': '2'])
+      ktlint(dep.ktlintVersion).userData(['indent_size': '2', 'continuation_indent_size': '2'])
     }
   }
 

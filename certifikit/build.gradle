@@ -11,11 +11,11 @@ jar {
 }
 
 dependencies {
-  api Dependencies.okio
+  api dep.okio
 
-  testImplementation Dependencies.junit5Api
-  testImplementation Dependencies.junit5JupiterEngine
-  testImplementation Dependencies.assertj
+  testImplementation dep.junit5Api
+  testImplementation dep.junit5JupiterEngine
+  testImplementation dep.assertj
 }
 
 sourceSets {
